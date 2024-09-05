@@ -1,12 +1,15 @@
-# main.py
+
 from fastapi import FastAPI
 from routes.auth import router as auth_router
 
+#initiliaze Fast app
 app = FastAPI()
 
-# Include authentication routes
-app.include_router(auth_router, prefix="/auth")
+# Include routes
+app.include_router(auth_router, prefix='/auth')
 
+
+#Define a root endpoint:
 @app.get("/")
-def read_root():
-    return {"message": "Welcome to ShopEase API"}
+def show_message():
+    return{"message :" "Welcome to ShopEase API"}

@@ -1,6 +1,7 @@
 # database.py
 import psycopg2
 from psycopg2.extras import RealDictCursor
+from typing import Generator
 
 # Database connection settings
 conn = psycopg2.connect(
@@ -13,5 +14,6 @@ conn = psycopg2.connect(
 )
 
 # Cursor setup
-conn.autocommit = True
-cursor = conn.cursor(cursor_factory=RealDictCursor)
+def get_db() -> Generator:
+    with conn.cursor(cursor_factory=RealDictCursor) as cursor:
+        yield cursor

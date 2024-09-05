@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import axios from "axios"; // Import Axios at the top
+
 import {
   Box,
   Button,
@@ -20,6 +22,7 @@ import HomeIcon from "@mui/icons-material/Home";
 import CategoryIcon from "@mui/icons-material/Category";
 import LocationCityIcon from "@mui/icons-material/LocationCity";
 import Logo from "../../assets/logo.png";
+
 
 const Root = styled("div")({
   display: "flex",
@@ -63,11 +66,36 @@ const SignUpForm = () => {
       [name]: type === "checkbox" ? checked : value,
     });
   };
+// Update the handleSubmit function
+const handleSubmit = async (e) => {
+  e.preventDefault();
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    console.log(formData);
-  };
+  try {
+    // Make an Axios POST request to the backend signup endpoint
+    const response = await axios.post("http://localhost:8000/auth/signup", {
+      fullName: formData.fullName,
+      email: formData.email,
+      password: formData.password,
+      confirmPassword: formData.confirmPassword,
+      phoneNumber: formData.phoneNumber,
+      gender: formData.gender,
+      streetAddress: formData.streetAddress,
+      city: formData.city,
+      preferredCategory: formData.preferredCategory,
+      termsAccepted: formData.termsAccepted,
+      newsletterSubscription: formData.newsletterSubscription,
+    });
+
+    // Display success message or navigate user
+    console.log(response.data);
+    alert("User created successfully!");
+  } catch (error) {
+    // Handle error response
+    console.error("Error signing up:", error.response?.data?.detail || error.message);
+    alert(error.response?.data?.detail || "An error occurred during signup.");
+  }
+};
+
 
   return (
     <Root>
