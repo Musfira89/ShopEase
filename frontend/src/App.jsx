@@ -5,6 +5,10 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import "./App.css";
 import Home from "./components/Home/Home";
 import Signup from "./components/Auth/Signup";
+// import Hero from "./components/Home/Hero Section/Hero";
+import './index.css';
+import Hero from "./components/Home/Hero Section/Hero";
+import Cards from "./components/Home/cards/Cards";
 
 function App() {
   return (
@@ -14,6 +18,10 @@ function App() {
         <Route path="/" element={<Home />} />
         {/* <Route path="/login" element={<Login />} /> */}
         <Route path="/signup" element={<Signup />} /> 
+        <Route path="/hero" element={<Hero />} /> 
+        <Route path="/cards" element={<Cards />} /> 
+
+        {/* <Route path='/hero' element={<Hero />} /> */}
       </Routes>
     </Router>
   );
